@@ -3,254 +3,371 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zach Mair | Mechatronics Systems Engineering</title>
-<meta name="description" content="Portfolio of Zach Mair, Mechatronics Systems Engineering student at Western University.">
+<title>Zach Mair | Mechatronics Engineering</title>
+<meta name="description" content="Zach Mair, Mechatronics Systems Engineering student at Western University. Projects in mechanical design, electronics and code.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
 <style>
+  /* ---------- Colours ---------- */
   :root {
-    --bg: #fafaf9;
-    --surface: #ffffff;
-    --text: #1c1917;
-    --muted: #57534e;
-    --border: #e7e5e4;
-    --accent: #4f2683;          /* Western purple */
-    --accent-soft: #f3eefa;
-    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.04);
+    --paper: #eef1f2;      /* cool drafting-paper grey */
+    --panel: #ffffff;
+    --ink: #17222c;        /* deep blue-grey text */
+    --ink-soft: #4a5866;
+    --line: #cdd4d9;
+    --purple: #4f2683;     /* Western purple */
+    --amber: #f2a900;      /* the "light is on" colour */
+    --room-on: #fff6dc;
+    --room-off: #2a3440;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #0c0a09;
-      --surface: #1c1917;
-      --text: #fafaf9;
-      --muted: #a8a29e;
-      --border: #292524;
-      --accent: #b18be8;
-      --accent-soft: #2a1f3d;
-      --shadow: none;
+      --paper: #141c24;
+      --panel: #1c2630;
+      --ink: #e8edf0;
+      --ink-soft: #a3b0bb;
+      --line: #2e3a46;
+      --purple: #b99be8;
+      --room-on: #3a3220;
+      --room-off: #0d1318;
     }
   }
+
+  /* ---------- Base ---------- */
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'Inter', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;
+    font-size: 1.0625rem;
     line-height: 1.6;
   }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+  h1, h2, h3 { font-family: 'Bricolage Grotesque', system-ui, sans-serif; line-height: 1.08; }
+  a { color: var(--purple); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  p { max-width: 62ch; }
 
-  /* Nav */
-  nav {
-    position: sticky; top: 0; z-index: 10;
-    background: color-mix(in srgb, var(--bg) 85%, transparent);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-  }
-  nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
-  nav .logo { font-weight: 700; color: var(--text); text-decoration: none; }
-  nav ul { display: flex; gap: 24px; list-style: none; }
-  nav a { color: var(--muted); text-decoration: none; font-size: .95rem; }
-  nav a:hover { color: var(--accent); }
+  /* ---------- Nav ---------- */
+  .top { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; }
+  .top .name { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 1.25rem; color: var(--ink); text-decoration: none; }
+  .top nav { display: flex; gap: 22px; }
+  .top nav a { color: var(--ink-soft); text-decoration: none; }
+  .top nav a:hover { color: var(--ink); text-decoration: underline; }
 
-  /* Hero */
-  .hero { padding: 96px 0 64px; }
-  .tag {
-    font-family: 'JetBrains Mono', monospace; font-size: .85rem;
-    color: var(--accent); margin-bottom: 12px;
-  }
-  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1.1; margin-bottom: 20px; }
-  .hero p { font-size: 1.15rem; color: var(--muted); max-width: 620px; margin-bottom: 32px; }
-  .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  /* ---------- Hero ---------- */
+  .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; padding: 48px 0 96px; }
+  .hero h1 { font-size: clamp(2.6rem, 5.6vw, 4.6rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 24px; }
+  .hero p { color: var(--ink-soft); font-size: 1.15rem; margin-bottom: 16px; }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
   .btn {
-    display: inline-block; padding: 12px 22px; border-radius: 8px;
-    font-weight: 600; text-decoration: none; font-size: .95rem;
-    border: 1px solid var(--accent); transition: transform .15s;
+    display: inline-block; padding: 13px 22px; border-radius: 999px;
+    font-weight: 700; text-decoration: none; font-size: 1rem;
+    border: 2px solid var(--ink); color: var(--ink); background: transparent; cursor: pointer;
+    font-family: inherit;
   }
-  .btn:hover { transform: translateY(-2px); }
-  .btn.primary { background: var(--accent); color: #fff; }
-  .btn.ghost { color: var(--accent); }
+  .btn.solid { background: var(--ink); color: var(--paper); }
+  .btn:active { transform: translateY(1px); }
 
-  /* Sections */
-  section { padding: 64px 0; }
-  h2 { font-size: 1.75rem; margin-bottom: 8px; }
-  .sub { color: var(--muted); margin-bottom: 36px; }
+  /* ---------- Live demo ---------- */
+  .demo {
+    border-radius: 28px; padding: 22px 22px 18px;
+    background: var(--room-on);
+    transition: background-color .9s ease;
+    border: 1px solid var(--line);
+    position: relative;
+  }
+  .demo.dark { background: var(--room-off); }
+  .demo svg { width: 100%; height: auto; display: block; touch-action: manipulation; }
+  .demo .readout {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+    margin-top: 6px; font-size: .95rem; color: var(--ink);
+  }
+  .demo.dark .readout { color: #e8edf0; }
+  .demo .readout button {
+    font: inherit; font-weight: 700; font-size: .9rem;
+    padding: 8px 16px; border-radius: 999px; border: 2px solid currentColor;
+    background: transparent; color: inherit; cursor: pointer;
+  }
+  .demo .readout button[hidden] { display: none; }
+  .demo-caption { font-size: .95rem; color: var(--ink-soft); margin-top: 14px; max-width: 52ch; }
 
-  /* Project cards */
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
-  .card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; overflow: hidden; box-shadow: var(--shadow);
-    display: flex; flex-direction: column; transition: transform .2s;
-  }
-  .card:hover { transform: translateY(-4px); }
-  .card img, .card .placeholder {
-    width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block;
-    background: var(--accent-soft);
-  }
-  .card .placeholder {
-    display: flex; align-items: center; justify-content: center;
-    color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: .85rem;
-  }
-  .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
-  .card h3 { font-size: 1.15rem; margin-bottom: 8px; }
-  .card p { color: var(--muted); font-size: .95rem; margin-bottom: 16px; flex: 1; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-  .chip {
-    font-family: 'JetBrains Mono', monospace; font-size: .75rem;
-    background: var(--accent-soft); color: var(--accent);
-    padding: 3px 9px; border-radius: 999px;
-  }
-  .links { display: flex; gap: 16px; }
-  .links a { color: var(--accent); font-weight: 600; font-size: .9rem; text-decoration: none; }
-  .links a:hover { text-decoration: underline; }
-  .status { font-size: .75rem; color: var(--muted); font-style: italic; }
+  #lever { transform-box: view-box; transform-origin: 170px 190px; transition: transform .18s ease-in; }
+  .off #lever { transform: rotate(180deg); }
+  #arm { transform-box: view-box; transform-origin: 258px 152px; transition: transform .35s cubic-bezier(.5,0,.3,1); }
+  .pushing #arm { transform: rotate(-30deg); }
+  #pulse { opacity: 0; transform-box: view-box; transform-origin: 278px 126px; }
+  .sensing #pulse { animation: ping .9s ease-out; }
+  @keyframes ping { from { opacity: .7; transform: scale(.6); } to { opacity: 0; transform: scale(2.4); } }
+  #glow { transition: opacity .9s ease; }
+  .off #glow { opacity: 0; }
 
-  /* About & skills */
-  .about { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; }
-  .about p { color: var(--muted); margin-bottom: 16px; }
-  .skills h4 { font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 10px; }
-  .skills .chips { margin-bottom: 24px; }
+  /* ---------- Sections ---------- */
+  section { padding: 88px 0; border-top: 1px solid var(--line); }
+  section > .wrap > h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.015em; margin-bottom: 48px; }
+
+  /* Projects: big rows, not cards */
+  .project { display: grid; grid-template-columns: 7fr 5fr; gap: 48px; align-items: start; margin-bottom: 80px; }
+  .project:last-child { margin-bottom: 0; }
+  .project.flip { grid-template-columns: 5fr 7fr; }
+  .project.flip .shot { order: 2; }
+  .shot { border-radius: 20px; overflow: hidden; background: var(--panel); border: 1px solid var(--line); aspect-ratio: 4 / 3; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shot.empty { display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; color: var(--ink-soft); font-size: .95rem;
+    background-image: repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, var(--line) 50%, transparent) 14px 15px); }
+  .project h3 { font-size: 1.9rem; font-weight: 700; margin-bottom: 16px; }
+  .project p { color: var(--ink-soft); margin-bottom: 14px; }
+  .built-with { font-size: .95rem; color: var(--ink-soft); margin: 18px 0 20px; }
+  .built-with strong { color: var(--ink); }
+  .project .more { font-weight: 700; }
+  .project.planned .shot { border-style: dashed; }
+
+  /* About */
+  .about { display: grid; grid-template-columns: 280px 1fr; gap: 56px; align-items: start; }
+  .portrait { width: 100%; aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--purple); }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .portrait.empty { display: flex; align-items: center; justify-content: center; color: #fff;
+    font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 4.5rem; }
+  .about p { margin-bottom: 16px; color: var(--ink-soft); }
+  .about h3 { font-size: 1.3rem; margin: 32px 0 12px; }
+  .lately { list-style: none; }
+  .lately li { padding: 10px 0; border-bottom: 1px solid var(--line); color: var(--ink); }
+  .lately li:first-child { border-top: 1px solid var(--line); }
 
   /* Contact */
-  .contact { text-align: center; }
-  .contact .btns { justify-content: center; }
-  footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 32px 0; border-top: 1px solid var(--border); }
+  .contact h2 { margin-bottom: 16px !important; }
+  .contact p { color: var(--ink-soft); margin-bottom: 28px; }
+  .email {
+    font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700;
+    font-size: clamp(1.7rem, 5vw, 3.2rem); color: var(--ink); text-decoration-thickness: 3px;
+    text-decoration-color: var(--amber); word-break: break-word;
+  }
+  .contact .actions { margin-top: 32px; }
+  footer { padding: 32px 0 48px; color: var(--ink-soft); font-size: .9rem; }
 
-  @media (max-width: 700px) {
-    nav ul { gap: 14px; }
-    .about { grid-template-columns: 1fr; gap: 24px; }
-    .hero { padding: 64px 0 40px; }
+  /* ---------- Small screens ---------- */
+  @media (max-width: 860px) {
+    .hero, .project, .project.flip, .about { grid-template-columns: 1fr; gap: 32px; }
+    .project.flip .shot { order: 0; }
+    .hero { padding-top: 24px; }
+    .about .portrait { max-width: 200px; }
+    .top nav { gap: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+    html { scroll-behavior: auto; }
   }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="wrap">
-    <a href="#" class="logo">Zach Mair</a>
-    <ul>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
-
-<header class="hero">
-  <div class="wrap">
-    <div class="tag">// Mechatronics Systems Engineering @ Western</div>
-    <h1>I design and build<br>things that move.</h1>
-    <p>Second-year Mechatronics student at Western University working at the intersection of mechanical design, embedded systems, and controls. Looking for Summer 2027 internships.</p>
-    <div class="btns">
-      <a href="#projects" class="btn primary">See my projects</a>
-      <a href="resume.pdf" class="btn ghost" target="_blank">Resume</a>
-    </div>
-  </div>
+<header class="wrap top">
+  <a href="#" class="name">Zach Mair</a>
+  <nav>
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+    <a href="resume.pdf" target="_blank">Resume</a>
+  </nav>
 </header>
 
-<section id="projects">
-  <div class="wrap">
-    <h2>Projects</h2>
-    <p class="sub">Things I've designed, built, and broken along the way.</p>
-
-    <div class="grid">
-
-      <!-- PROJECT 1 — swap the placeholder div for: <img src="images/light-switch.jpg" alt="Light switch device"> -->
-      <article class="card">
-        <div class="placeholder">[ photo / demo GIF ]</div>
-        <div class="card-body">
-          <h3>Automatic Energy-Saving Light Switch</h3>
-          <p>A retrofit cover that detects when a room is empty and uses a servo to flip a standard toggle switch off — no rewiring needed. An LCD shows estimated energy saved.</p>
-          <div class="chips">
-            <span class="chip">Arduino</span>
-            <span class="chip">PIR sensor</span>
-            <span class="chip">Servo</span>
-            <span class="chip">SolidWorks</span>
-            <span class="chip">3D printing</span>
-          </div>
-          <div class="links">
-            <a href="https://github.com/ZacharyMair/light-switch" target="_blank">Code &amp; CAD →</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- PROJECT 2 — copy a whole <article> block to add more -->
-      <article class="card">
-        <div class="placeholder">[ coming soon ]</div>
-        <div class="card-body">
-          <h3>Next Project</h3>
-          <p>Short description: what problem it solves, what you built, and one result.</p>
-          <div class="chips">
-            <span class="chip">Skill</span>
-            <span class="chip">Tool</span>
-          </div>
-          <span class="status">In progress</span>
-        </div>
-      </article>
-
-      <!-- PROJECT 3 -->
-      <article class="card">
-        <div class="placeholder">[ coming soon ]</div>
-        <div class="card-body">
-          <h3>Another Project</h3>
-          <p>Short description: what problem it solves, what you built, and one result.</p>
-          <div class="chips">
-            <span class="chip">Skill</span>
-            <span class="chip">Tool</span>
-          </div>
-          <span class="status">Planned</span>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<section id="about">
-  <div class="wrap about">
+<main>
+  <div class="wrap hero">
     <div>
-      <h2>About me</h2>
-      <p class="sub" style="margin-bottom:20px">Engineering student, builder, occasional finance guy.</p>
-      <p>I'm a Mechatronics Systems Engineering student at Western University in London, Ontario, from Toronto. I like projects where mechanical design, electronics and code all have to work together.</p>
-      <p>Outside of class, I'm Finance Director of the Western Ski and Snowboard Club and I've taken business courses alongside engineering. I'm bilingual in English and French.</p>
+      <h1>I'm Zach. I like making things that move on their own.</h1>
+      <p>I'm a second-year Mechatronics Systems Engineering student at Western University. Most of what I build mixes a bit of CAD, a bit of electronics and a bit of code.</p>
+      <p>I'm looking for a summer 2027 internship in robotics, automation or hardware around Toronto.</p>
+      <div class="actions">
+        <a href="#projects" class="btn solid">See my projects</a>
+        <a href="https://www.linkedin.com/in/zachary-mair-44676938a" class="btn" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
     </div>
-    <div class="skills">
-      <h4>Design</h4>
-      <div class="chips">
-        <span class="chip">SolidWorks (CSWA)</span>
-        <span class="chip">3D printing</span>
-        <span class="chip">Tinkercad</span>
+
+    <div>
+      <div class="demo" id="demo">
+        <svg viewBox="0 0 360 330" role="img" aria-label="Animated light switch with a servo arm and motion sensor">
+          <defs>
+            <radialGradient id="g" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f2a900" stop-opacity=".55"/>
+              <stop offset="100%" stop-color="#f2a900" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle id="glow" cx="60" cy="40" r="120" fill="url(#g)"/>
+
+          <!-- wall plate -->
+          <rect x="100" y="80" width="140" height="210" rx="14" fill="#fbfbf8" stroke="#9aa6b0" stroke-width="2"/>
+          <circle cx="170" cy="100" r="5" fill="#c3ccd3"/>
+          <circle cx="170" cy="270" r="5" fill="#c3ccd3"/>
+          <rect x="156" y="144" width="28" height="92" rx="5" fill="#e3e7ea" stroke="#9aa6b0" stroke-width="1.5"/>
+          <g id="lever">
+            <rect x="161" y="148" width="18" height="44" rx="7" fill="#ffffff" stroke="#7b8894" stroke-width="2"/>
+          </g>
+
+          <!-- 3D-printed enclosure -->
+          <rect x="232" y="100" width="92" height="160" rx="12" fill="#4f2683"/>
+          <!-- PIR sensor -->
+          <circle id="pulse" cx="278" cy="126" r="14" fill="none" stroke="#f2a900" stroke-width="3"/>
+          <circle cx="278" cy="126" r="13" fill="#f4f1f8"/>
+          <circle cx="278" cy="126" r="6" fill="#d9d2e6"/>
+          <!-- LCD -->
+          <rect x="242" y="190" width="72" height="48" rx="4" fill="#9fc28a"/>
+          <text id="lcd1" x="248" y="208" font-family="monospace" font-size="10" fill="#1f3b16">LIGHT ON</text>
+          <text id="lcd2" x="248" y="226" font-family="monospace" font-size="10" fill="#1f3b16">OFFx 0</text>
+          <!-- servo arm -->
+          <g id="arm">
+            <rect x="170" y="147" width="92" height="10" rx="5" fill="#ffffff" stroke="#2c1550" stroke-width="2"/>
+          </g>
+          <circle cx="258" cy="152" r="10" fill="#ffffff" stroke="#2c1550" stroke-width="2"/>
+          <circle cx="258" cy="152" r="3" fill="#2c1550"/>
+        </svg>
+        <div class="readout">
+          <span id="status" aria-live="polite">Motion detected. Light stays on.</span>
+          <button id="reset" type="button" hidden>Turn the light back on</button>
+        </div>
       </div>
-      <h4>Programming</h4>
-      <div class="chips">
-        <span class="chip">C</span>
-        <span class="chip">Arduino</span>
-        <span class="chip">Python</span>
-      </div>
-      <h4>Electronics</h4>
-      <div class="chips">
-        <span class="chip">Circuit analysis</span>
-        <span class="chip">Sensors</span>
-        <span class="chip">Actuators</span>
-      </div>
+      <p class="demo-caption">This is my light switch project running in your browser. Keep your mouse moving over it. Stop for six seconds and the servo turns the light off for you.</p>
     </div>
   </div>
-</section>
 
-<section id="contact" class="contact">
-  <div class="wrap">
-    <h2>Let's talk</h2>
-    <p class="sub">Open to Summer 2027 internships in mechatronics, robotics, automation and hardware, in Toronto/GTA.</p>
-    <div class="btns">
-      <a href="mailto:zmair@uwo.ca" class="btn primary">Email me</a>
-      <a href="www.linkedin.com/in/zachary-mair-44676938a" class="btn ghost" target="_blank">LinkedIn</a>
-      <a href="https://github.com/ZacharyMair" class="btn ghost" target="_blank">GitHub</a>
+  <section id="projects">
+    <div class="wrap">
+      <h2>Things I've built</h2>
+
+      <article class="project">
+        <figure class="shot">
+          <!-- Upload a photo or GIF to an "images" folder with this exact name -->
+          <img src="images/light-switch.jpg" alt="The automatic light switch mounted over a wall switch"
+               onerror="this.parentElement.classList.add('empty');this.parentElement.textContent='Photo coming soon: images/light-switch.jpg'">
+        </figure>
+        <div>
+          <h3>Automatic energy-saving light switch</h3>
+          <p>I kept leaving my lights on, and I didn't want to rewire anything. So I designed a cover that fits over a normal toggle switch. A motion sensor watches the room, and once it's been empty long enough, a servo arm flips the switch off. A small LCD keeps a running estimate of the energy saved.</p>
+          <p>I wrote and tested the control logic in a Tinkercad simulation first, then modelled the servo arm, enclosure and lid in SolidWorks for 3D printing.</p>
+          <p class="built-with"><strong>Built with</strong> Arduino, PIR motion sensor, servo, LCD, SolidWorks, 3D printing</p>
+          <a class="more" href="https://github.com/ZacharyMair/light-switch" target="_blank" rel="noopener">See the code and CAD on GitHub</a>
+        </div>
+      </article>
+
+      <!-- Copy a whole <article class="project flip"> ... </article> block for each new project -->
+      <article class="project flip planned">
+        <figure class="shot empty">On the bench now</figure>
+        <div>
+          <h3>Next build</h3>
+          <p>I'm working on my next project. It'll go up here once there's something worth showing.</p>
+        </div>
+      </article>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>© 2026 Zach Mair</footer>
+  <section id="about">
+    <div class="wrap">
+      <h2>A bit more about me</h2>
+      <div class="about">
+        <!-- Add a photo of yourself to images/me.jpg -->
+        <div class="portrait"><img src="images/me.jpg" alt="Zach Mair"
+             onerror="this.parentElement.classList.add('empty');this.parentElement.textContent='ZM'"></div>
+        <div>
+          <p>I'm from Toronto and studying in London, Ontario. I picked mechatronics because I didn't want to choose between mechanical, electrical and software. The projects I enjoy most need all three to work.</p>
+          <p>I'm also working toward a dual degree with Ivey, so I care about the business side too: what something costs, who it's for, and whether it's worth building. I speak English and French.</p>
 
+          <h3>Lately I've been</h3>
+          <ul class="lately">
+            <li>Taking C programming, circuits and mechanics of materials</li>
+            <li>Working through IBM's AI Developer certificate on Coursera</li>
+            <li>Running the finances for the Western Ski and Snowboard Club</li>
+            <li>Making coffee and baking on the side</li>
+          </ul>
+
+          <h3>Tools I use</h3>
+          <p>SolidWorks (CSWA certified), Arduino, C, Python, Tinkercad and 3D printing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Want to talk?</h2>
+      <p>Email is the fastest way to reach me. I'm happy to chat about internships, projects, or anything on this page.</p>
+      <a class="email" href="mailto:zmair@uwo.ca">zmair@uwo.ca</a>
+      <div class="actions">
+        <button class="btn solid" id="copy" type="button">Copy email</button>
+        <a class="btn" href="https://www.linkedin.com/in/zachary-mair-44676938a" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/ZacharyMair" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="resume.pdf" target="_blank">Resume</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">© 2026 Zach Mair. Hosted on GitHub Pages.</footer>
+
+<script>
+  // ---- Light switch demo ----
+  (function () {
+    const demo = document.getElementById('demo');
+    const svg = demo.querySelector('svg');
+    const status = document.getElementById('status');
+    const reset = document.getElementById('reset');
+    const lcd1 = document.getElementById('lcd1');
+    const lcd2 = document.getElementById('lcd2');
+    const DELAY = 6000;
+    let on = true, last = Date.now(), count = 0, lastPing = 0, busy = false;
+
+    function motion() {
+      last = Date.now();
+      if (on && last - lastPing > 900) {
+        lastPing = last;
+        svg.classList.remove('sensing'); void svg.getBBox(); svg.classList.add('sensing');
+      }
+    }
+    function switchOff() {
+      busy = true;
+      svg.classList.add('pushing');
+      setTimeout(() => {
+        on = false; count++;
+        svg.classList.add('off'); demo.classList.add('dark');
+        lcd1.textContent = 'LIGHT OFF';
+        lcd2.textContent = 'OFFx ' + count;
+        status.textContent = 'Room empty, so the light is off.';
+        reset.hidden = false;
+      }, 300);
+      setTimeout(() => { svg.classList.remove('pushing'); busy = false; }, 700);
+    }
+    function switchOn() {
+      on = true; last = Date.now();
+      svg.classList.remove('off'); demo.classList.remove('dark');
+      lcd1.textContent = 'LIGHT ON';
+      status.textContent = 'Motion detected. Light stays on.';
+      reset.hidden = true;
+    }
+
+    demo.addEventListener('pointermove', motion);
+    demo.addEventListener('pointerdown', motion);
+    svg.addEventListener('click', () => { if (!on && !busy) switchOn(); });
+    reset.addEventListener('click', switchOn);
+
+    setInterval(() => {
+      if (!on || busy) return;
+      const idle = Date.now() - last;
+      if (idle >= DELAY) { switchOff(); return; }
+      if (idle > 1500) {
+        status.textContent = 'No motion. Turning off in ' + Math.ceil((DELAY - idle) / 1000) + ' s.';
+      } else {
+        status.textContent = 'Motion detected. Light stays on.';
+      }
+    }, 250);
+  })();
+
+  // ---- Copy email ----
+  document.getElementById('copy').addEventListener('click', function () {
+    const btn = this;
+    navigator.clipboard.writeText('zmair@uwo.ca').then(() => {
+      btn.textContent = 'Email copied';
+      setTimeout(() => { btn.textContent = 'Copy email'; }, 2000);
+    }).catch(() => { window.location.href = 'mailto:zmair@uwo.ca'; });
+  });
+</script>
 </body>
 </html>
